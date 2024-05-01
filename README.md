@@ -4,6 +4,7 @@
 
 ```shell
 cargo generate esp-rs/esp-template
+cargo r -rp clean --target x86_64-pc-windows-msvc
 ```
 
 ## 亮灯
@@ -11,6 +12,8 @@ cargo generate esp-rs/esp-template
 - blinky 同步亮灯
 - blinky-async 异步亮灯
 
-## 温湿度
+```shell
+cargo r -rp blinky
+cargo r -rp blinky-async
+```
 
-- dht 监控温度湿度

@@ -1,0 +1,10 @@
+[package]
+name = "workspace"
+version = "0.1.0"
+authors = ["Mll <mllcms@163.com>"]
+edition = "2021"
+license = "MIT OR Apache-2.0"
+
+[workspace]
+resolver = "2"
+members = ["blinky", "blinky-async", "buzzer", "buzzer-switch", "dht11", "clean"]
