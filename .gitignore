@@ -1,0 +1,7 @@
+.idea
+debug/
+target/
+
+# Added by cargo
+
+/target
