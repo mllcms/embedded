@@ -17,3 +17,13 @@ cargo r -rp blinky
 cargo r -rp blinky-async
 ```
 
+## 温湿度
+
+- dht11 监控温度湿度
+
+```shell
+cargo r -rp dht11
+```
+
+![接线图](/dht11/接线图.jpg)
+
