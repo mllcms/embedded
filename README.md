@@ -10,3 +10,7 @@ cargo generate esp-rs/esp-template
 
 - blinky 同步亮灯
 - blinky-async 异步亮灯
+
+## 温湿度
+
+- dht 监控温度湿度
