@@ -1,0 +1,24 @@
+#![no_std]
+#![no_main]
+
+use esp_backtrace as _;
+use esp_hal::{clock::ClockControl, delay::Delay, peripherals::Peripherals, prelude::*};
+use esp_hal::gpio::IO;
+
+#[entry]
+fn main() -> ! {
+    let peripherals = Peripherals::take();
+    let system = peripherals.SYSTEM.split();
+
+    let clocks = ClockControl::max(system.clock_control).freeze();
+    let delay = Delay::new(&clocks);
+
+    esp_println::logger::init_logger_from_env();
+    let io = IO::new(peripherals.GPIO,peripherals.IO_MUX);
+    let mut buzzer = io.pins.gpio13.into_push_pull_output();
+    loop {
+        buzzer.toggle();
+        log::info!("Hello world!");
+        delay.delay(500.millis());
+    }
+}

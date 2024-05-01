@@ -27,3 +27,14 @@ cargo r -rp dht11
 
 ![接线图](/dht11/接线图.jpg)
 
+## 蜂鸣器
+
+- buzzer 循环发声
+- buzzer-switch 触发发声
+
+```shell
+cargo r -rp buzzer
+cargo r -rp buzzer-switch
+```
+
+![接线图](/buzzer/接线图.jpg)
