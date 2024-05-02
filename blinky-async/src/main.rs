@@ -4,12 +4,7 @@
 use embassy_executor::Spawner;
 use embassy_time::{Duration, Timer};
 use esp_backtrace as _;
-use esp_hal::clock::ClockControl;
-use esp_hal::embassy;
-use esp_hal::gpio::IO;
-use esp_hal::peripherals::Peripherals;
-use esp_hal::prelude::*;
-use esp_hal::timer::TimerGroup;
+use esp_hal::{clock::ClockControl, embassy, gpio::IO, peripherals::Peripherals, prelude::*, timer::TimerGroup};
 
 #[main]
 async fn main(spawner: Spawner) -> ! {
@@ -17,7 +12,7 @@ async fn main(spawner: Spawner) -> ! {
     let system = peripherals.SYSTEM.split();
     let clocks = ClockControl::max(system.clock_control).freeze();
     let timg0 = TimerGroup::new_async(peripherals.TIMG0, &clocks);
-    
+
     embassy::init(&clocks, timg0);
     esp_println::logger::init_logger_from_env();
     let io = IO::new(peripherals.GPIO, peripherals.IO_MUX);

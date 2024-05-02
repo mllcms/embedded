@@ -2,8 +2,7 @@
 #![no_main]
 
 use esp_backtrace as _;
-use esp_hal::{clock::ClockControl, delay::Delay, peripherals::Peripherals, prelude::*};
-use esp_hal::gpio::IO;
+use esp_hal::{clock::ClockControl, delay::Delay, gpio::IO, peripherals::Peripherals, prelude::*};
 
 #[entry]
 fn main() -> ! {
@@ -14,7 +13,7 @@ fn main() -> ! {
     let delay = Delay::new(&clocks);
 
     esp_println::logger::init_logger_from_env();
-    let io = IO::new(peripherals.GPIO,peripherals.IO_MUX);
+    let io = IO::new(peripherals.GPIO, peripherals.IO_MUX);
     let mut buzzer = io.pins.gpio13.into_push_pull_output();
     loop {
         buzzer.toggle();

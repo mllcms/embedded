@@ -9,18 +9,18 @@ use embedded_hal::{
 };
 
 pub struct Dht11<HE, P, D>
-    where
-        P: InputPin<Error = HE> + OutputPin<Error = HE>,
-        D: DelayNs,
+where
+    P: InputPin<Error = HE> + OutputPin<Error = HE>,
+    D: DelayNs,
 {
     pin:   P,
     delay: D,
 }
 
 impl<HE, P, D> Dht11<HE, P, D>
-    where
-        P: InputPin<Error = HE> + OutputPin<Error = HE>,
-        D: DelayNs,
+where
+    P: InputPin<Error = HE> + OutputPin<Error = HE>,
+    D: DelayNs,
 {
     pub fn new(pin: P, delay: D) -> Self {
         Self { pin, delay }
@@ -35,13 +35,13 @@ impl<HE, P, D> Dht11<HE, P, D>
         self.delay.delay_us(25);
 
         // 等 dht11 信号
-        self.wait_signal(85,PinState::High,DhtError::NotPresent)?;
-        self.wait_signal(85,PinState::Low,DhtError::NotPresent)?;
+        self.wait_signal(85, PinState::High, DhtError::NotPresent)?;
+        self.wait_signal(85, PinState::Low, DhtError::NotPresent)?;
 
         // 开始接收数据
         for bit in 0..40 {
-            self.wait_signal(55,PinState::High,DhtError::Timeout)?;
-            let elapsed = self.wait_signal(55,PinState::Low,DhtError::Timeout)?;
+            self.wait_signal(55, PinState::High, DhtError::Timeout)?;
+            let elapsed = self.wait_signal(55, PinState::Low, DhtError::Timeout)?;
             if elapsed > 30 {
                 let byte = bit / 8;
                 let shift = 7 - bit % 8;

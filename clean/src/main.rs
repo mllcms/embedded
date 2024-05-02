@@ -1,5 +1,12 @@
-use std::{collections::HashSet, fmt::Display, fs, fs::DirEntry, path::{Path, PathBuf}, sync::mpsc::Sender, thread};
-use std::sync::mpsc;
+use std::{
+    collections::HashSet,
+    fmt::Display,
+    fs,
+    fs::DirEntry,
+    path::{Path, PathBuf},
+    sync::{mpsc, mpsc::Sender},
+    thread,
+};
 
 use rayon::prelude::*;
 use serde::{Deserialize, Serialize};
@@ -8,26 +15,26 @@ fn main() {
     match Config::load("clean.toml") {
         Ok(config) => match config.clean() {
             Ok(_) => println!("清理成功!"),
-            Err(err) => eprintln!("清理失败: {err}")
-        }
+            Err(err) => eprintln!("清理失败: {err}"),
+        },
         Err(err) => return eprintln!("加载配置失败: {err}"),
     };
 }
 
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct Config {
- pub   path:   PathBuf,
- pub   clean:  HashSet<PathBuf>,
- pub   ignore: HashSet<PathBuf>,
+    pub path:   PathBuf,
+    pub clean:  HashSet<PathBuf>,
+    pub ignore: HashSet<PathBuf>,
     #[serde(skip)]
-  pub  output: Option<Sender<String>>,
+    pub output: Option<Sender<String>>,
 }
 
 impl Config {
     fn load(path: &str) -> anyhow::Result<Self> {
         let data = fs::read_to_string(path)?;
-        let mut config:Self = toml::from_str(&data)?;
-        let (tx,rx) = mpsc::channel();
+        let mut config: Self = toml::from_str(&data)?;
+        let (tx, rx) = mpsc::channel();
         config.output = Some(tx);
 
         thread::spawn(move || {
