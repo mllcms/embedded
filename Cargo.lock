@@ -196,19 +196,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "dht-embedded"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a5215d967f680524bc2a4a75c3e0f43d18d663e9d952dbcfe1bba86f43fb2584"
-dependencies = [
- "embedded-hal 1.0.0",
-]
-
-[[package]]
 name = "dht11"
 version = "0.1.0"
 dependencies = [
- "dht-embedded",
+ "driver",
  "esp-backtrace",
  "esp-hal",
  "esp-println",
@@ -222,6 +213,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ef5282ad69563b5fc40319526ba27e0e7363d552a896f0297d54f767717f9b95"
 dependencies = [
  "litrs",
+]
+
+[[package]]
+name = "driver"
+version = "0.1.0"
+dependencies = [
+ "embedded-hal 1.0.0",
+ "esp-hal",
+ "esp-println",
 ]
 
 [[package]]

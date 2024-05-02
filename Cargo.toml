@@ -7,4 +7,4 @@ license = "MIT OR Apache-2.0"
 
 [workspace]
 resolver = "2"
-members = ["blinky", "blinky-async", "buzzer", "buzzer-switch", "dht11", "clean"]
+members = ["blinky", "blinky-async", "buzzer", "buzzer-switch", "dht11", "clean", "driver"]
